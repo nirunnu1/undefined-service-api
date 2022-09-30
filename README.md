@@ -11,10 +11,6 @@ undefined-service-api is a JavaScript library for building user interfaces.
 ```
  const service = require("undefined-service-api");
 ```
-### `In Node.js:`
-```
- const service = require("undefined-service-api");
-```
 ### `In .env:`
 ```
  ENC_KEY='string'

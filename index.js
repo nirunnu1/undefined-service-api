@@ -50,7 +50,7 @@ class Service {
   };
 
   EncodeKey(id) {
-    if (this.IsNullOrEmpty(id)) {
+    if (this.isNullOrEmpty(id)) {
       return "";
     }
     id = this.encrypt(id.toString());
@@ -61,7 +61,7 @@ class Service {
 
   DecodeKey(id) {
     try {
-      if (this.IsNullOrEmpty(id)) {
+      if (this.isNullOrEmpty(id)) {
         return "";
       }
       let buff = new Buffer.from(id, "base64");
@@ -73,10 +73,16 @@ class Service {
     }
   }
   IsNull(obj, val) {
-    return this.IsNullOrEmpty(obj) ? (this.IsNullOrEmpty(val) ? "" : val) : obj;
+    return this.isNullOrEmpty(obj) ? (this.isNullOrEmpty(val) ? "" : val) : obj;
   }
   lodash = _;
+  resultSucceed(obj) {
+    return { status: true, ...obj };
+  }
+  resultFailed(obj) {
+    return { status: false, ...obj };
+  }
 }
 
 const service = new Service();
-export default service;
+module.exports = service;

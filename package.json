@@ -2,9 +2,6 @@
   "name": "undefined-service-api",
   "version": "1.0.6",
   "description": "",
-  "files": [
-    "index.js"
-  ],
   "engines": {
     "node": ">=10"
   },

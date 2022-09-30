@@ -1,0 +1,28 @@
+{
+  "name": "undefined-service-api",
+  "version": "1.0.0",
+  "description": "",
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nirunnu1/undefined-service-api.git"
+  },
+  "author": "Nirun Tulayote",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nirunnu1/undefined-service-api/issues"
+  },
+  "homepage": "https://github.com/nirunnu1/undefined-service-api#readme",
+  "dependencies": {
+    "lodash": "^4.17.20"
+  }
+}

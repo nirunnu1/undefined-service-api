@@ -1,6 +1,6 @@
 {
   "name": "undefined-service-api",
-  "version": "1.0.8",
+  "version": "1.0.12",
   "description": "",
   "engines": {
     "node": ">=10"
@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/nirunnu1/undefined-service-api#readme",
   "dependencies": {
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "axios": "^1.2.2",
+    "puppeteer": "^19.5.2"
   }
 }

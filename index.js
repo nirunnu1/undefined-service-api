@@ -1,5 +1,74 @@
 const _ = require("lodash");
+const puppeteer = require("puppeteer");
+const axios = require("axios");
 const crypto = require("crypto");
+const delay = (time) => {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, time);
+  });
+};
+const kerry = async (track) => {
+  try {
+    let data;
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://th.kerryexpress.com/en/track/");
+    let ell = await page.waitForSelector("input[type=text]");
+    let el = await page.click("input[type=text]");
+    await delay(1000);
+    for (let i = 0; i < track.length; i++) {
+      await page.keyboard.press(track[i]);
+    }
+    await delay(1000);
+    await page.keyboard.press("Enter");
+    await delay(1000);
+    await axios
+      .post(page.url())
+      .then(function (response) {
+        data = response.data;
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+    return data;
+  } catch (e) {
+    return e;
+  }
+};
+const thailandpost = async (track) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let data;
+      await axios
+        .post(
+          "https://international.thailandpost.com/wp-content/themes/thaipost/tracking.php?action=callapi&language=TH&barcode=" +
+            track
+        )
+        .then(function (response) {
+          // handle success
+          data = response.data;
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+        });
+      return resolve(data);
+    } catch (e) {
+      return reject(e);
+    }
+  });
+};
+const track = {
+  thailandpost: thailandpost,
+  kerry: kerry,
+};
 class Service {
   constructor(options) {
     this._options = options;
@@ -82,6 +151,7 @@ class Service {
   resultFailed(obj) {
     return { status: false, ...obj };
   }
+  track = track;
 }
 
 const service = new Service();

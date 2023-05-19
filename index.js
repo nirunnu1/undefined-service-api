@@ -142,10 +142,16 @@ const GenerateCode = ({
   const _EncodeKey = code.map((e) => {
     return EncodeKey(e);
   });
-  var wb = new xl.Workbook();
-  var ws = wb.addWorksheet("Code");
-  ws.cell(1, 1).string(code[0]);
-  return { ...{ code, encrypt: _EncodeKey }, ...(excel ? { excel: wb } : {}) };
+  if (excel) {
+    let wb = new xl.Workbook();
+    let ws = wb.addWorksheet("Code");
+    code.map((e, i) => {
+      ws.cell(i + 1, 1).string(code[i]);
+    });
+    return { code, encrypt: _EncodeKey, excel: wb };
+  } else {
+    return { code, encrypt: _EncodeKey };
+  }
 };
 // const code = GenerateCode({
 //   encrypt: true,

@@ -1,3 +1,4 @@
+
 function GenerateRandom(length) {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

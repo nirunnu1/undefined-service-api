@@ -1,4 +1,5 @@
 const generateCode = require("./GenerateCode");
+const xl = require("excel4node");
 const _ = require("lodash");
 const puppeteer = require("puppeteer");
 const axios = require("axios");
@@ -129,6 +130,7 @@ const GenerateCode = ({
   length = 6,
   count = 1,
   format = "??????",
+  excel = false,
 }) => {
   const code = generateCode({
     encrypt: encrypt,
@@ -140,12 +142,15 @@ const GenerateCode = ({
   const _EncodeKey = code.map((e) => {
     return EncodeKey(e);
   });
-  return { code, encrypt: _EncodeKey };
+  var wb = new xl.Workbook();
+  var ws = wb.addWorksheet("Code");
+  ws.cell(1, 1).string(code[0]);
+  return { ...{ code, encrypt: _EncodeKey }, ...(excel ? { excel: wb } : {}) };
 };
 // const code = GenerateCode({
 //   encrypt: true,
 //   length: 6,
-//   count: 100000,
+//   count: 100,
 //   format: "GG-??????",
 // });
 // console.log(code);

@@ -1,10 +1,10 @@
 {
   "name": "undefined-service-api",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "",
   "files": [
     "index.js",
-    "Token/index.js"
+    "GenerateCode/index.js"
   ],
   "engines": {
     "node": ">=10"
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/nirunnu1/undefined-service-api#readme",
   "dependencies": {
     "axios": "^1.4.0",
+    "excel4node": "^1.8.2",
     "lodash": "^4.17.21",
     "puppeteer": "^19.11.1"
   },

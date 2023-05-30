@@ -4,18 +4,11 @@ const xl = require("excel4node");
 const _ = require("lodash");
 
 const crypto = require("crypto");
-tracking.kerry("33333");
-const delay = (time) => {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, time);
-  });
-};
+// (async () => {
+//   let tracking1 = await tracking.nim("1601810010235");
+//   console.log(tracking1);
+// })();
 
-
-// const track = {
-//   thailandpost: thailandpost,
-//   kerry: kerry,
-// };
 const isNullOrEmpty = (obj) => {
   if ("undefined" === typeof obj || obj == null) {
     return true;
@@ -136,7 +129,7 @@ class Service {
   resultFailed(obj) {
     return { status: false, ...obj };
   }
-  // track = track;
+  track = tracking;
   GenerateCode = GenerateCode;
 }
 

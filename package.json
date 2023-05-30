@@ -1,10 +1,14 @@
 {
   "name": "undefined-service-api",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "",
   "files": [
     "index.js",
-    "GenerateCode/index.js"
+    "GenerateCode/index.js",
+    "Tracking/index.js",
+    "Tracking/kerry.js",
+    "Tracking/nim.js",
+    "Tracking/thailandpost.js"
   ],
   "engines": {
     "node": ">=10"

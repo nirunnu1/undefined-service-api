@@ -2,10 +2,10 @@
 const puppeteer = require("puppeteer");
 const axios = require("axios");
 const delay = (time) => {
-    return new Promise(function (resolve) {
-      setTimeout(resolve, time);
-    });
-  };
+  return new Promise(function (resolve) {
+    setTimeout(resolve, time);
+  });
+};
 
 const nim = async (track) => {
   try {
@@ -22,21 +22,42 @@ const nim = async (track) => {
     await delay(1000);
     await page.keyboard.press("Enter");
     await delay(1000);
-    await axios
-      .post(page.url())
-      .then(function (response) {
-        data = response.data;
+
+    const trackno = await page.evaluate(() =>
+      Array.from(document.querySelectorAll("h2.text-center"), (element) => {
+        return element.textContent;
       })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .finally(function () {
-        // always executed
-      });
-    return data;
+    );
+    const item = await page.evaluate(() =>
+      Array.from(
+        document.querySelectorAll("#showTrack li .stacked-text"),
+        (element) => {
+          let date = "";
+          let status = "";
+          try {
+            date = element.children[0].textContent;
+          } catch {}
+          try {
+            status = element.children[1].textContent
+              .replaceAll("\t", "")
+              .replaceAll("\n", "")
+              .replaceAll("  ", "")
+              .trim();
+          } catch {}
+          return {
+            date: date,
+            text: status,
+          };
+        }
+      )
+    );
+
+    return {
+      trackno: trackno[0],
+      item,
+    };
   } catch (e) {
-    console.warn(e)
+    console.warn(e);
     return e;
   }
 };

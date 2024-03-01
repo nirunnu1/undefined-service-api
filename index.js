@@ -2,10 +2,29 @@ const generateCode = require("./GenerateCode");
 const tracking = require("./Tracking");
 const xl = require("excel4node");
 const _ = require("lodash");
+const moment = require("moment");
+function formatBuddhist(date, format) {
+  console.log("this", this)
+  const _m = moment(date)
+  var christianYear = _m.format('YYYY')
+  var buddhishYear = (parseInt(christianYear) + 543).toString()
+  if (service.isNullOrEmpty(format)) {
+    return new Date(_m)
+  } else {
+    return _m
+      .format(format.replace('YYYY', buddhishYear).replace('YY', buddhishYear.substring(2, 4))
+        .replace('yyyy', buddhishYear).replace('yy', buddhishYear.substring(2, 4)))
+      .replace(christianYear, buddhishYear)
+  }
+}
+moment.fn.formatBuddhist = formatBuddhist
+moment.prototype.formatBuddhist = formatBuddhist
 
 const crypto = require("crypto");
 // (async () => {
-//   let tracking1 = await tracking.nim("1601810010235");
+//   let tracking1 = await tracking.flash("TH471352SMN43");
+//   console.log(tracking1);
+//   tracking1 = await tracking.flash("TH471352SMN43A");
 //   console.log(tracking1);
 // })();
 
@@ -131,6 +150,7 @@ class Service {
   }
   track = tracking;
   GenerateCode = GenerateCode;
+  moment = moment
 }
 
 const service = new Service();
